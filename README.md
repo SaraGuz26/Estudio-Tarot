@@ -31,11 +31,12 @@ para explorar el Tarot Rider Waite Smith.
 - Liz Dean — Tarot Card Meanings
 - Dorothy Kelly — Combinaciones con el Tarot
 
-## 🚀 Ejecutar localmente
+## Prueba
 
 ```bash
 npm install
 npm run dev
+```
 
 ![INICIO](image.png)
 ![TIRADAS](image-1.png)
