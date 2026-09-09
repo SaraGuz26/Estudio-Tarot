@@ -1,0 +1,2782 @@
+* {
+  box-sizing: border-box;
+  
+}
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #27232a;
+  background: #f7f3ee;
+}
+
+body {
+  margin: 0;
+  color: #d8c9ad;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* HERO */
+
+.hero {
+  margin-bottom: 48px;
+  padding: 32px;
+  border-radius: 20px;
+  background: white;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/*GRID DE CARTAS*/
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+/*CARTA NORMAL*/
+
+.tarot-card {
+  background: white;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.tarot-card__image {
+  width: 100%;
+  aspect-ratio: 7 / 12;
+  overflow: hidden;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e9e2d8;
+}
+
+.tarot-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.tarot-card h3 {
+  margin: 12px 4px 4px;
+}
+
+/*CARTA SELECCIONADA */
+
+.card-selected {
+  position: relative;
+  cursor: default;
+
+  /* La carta abierta ocupa todo el ancho disponible */
+  grid-column: 1 / -1;
+
+  animation: cardExpand 0.3s ease-out;
+}
+
+/* Contenedor interno: imagen a la izquierda / información a la derecha
+*/
+
+.card-selected__layout {
+  display: grid;
+
+  /* Modificacion > La imagen ocupa menos espacio y la información un poco más */
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+
+  gap: 28px;
+
+  align-items: start;
+
+  /*Evita que el contenido fuerce el ancho de la tarjeta*/
+  min-width: 0;
+}
+
+/*IMAGEN DE CARTA ABIERTA*/
+
+.card-selected .tarot-card__image {
+  width: 100%;
+  aspect-ratio: 7 / 12;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.card-selected .tarot-card__image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/*INFORMACIÓN DE LA CARTA*/
+
+.card-detail__content {
+  min-width: 0;
+
+  padding: 8px 24px 8px 0;
+}
+
+/* ARCANO */
+
+.card-detail__number {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  color: #8b7968;
+}
+
+/* NOMBRE */
+
+.card-detail__content h3 {
+  margin: 4px 0 20px;
+
+  font-size: 1.5rem;
+}
+
+/* SECCIONES */
+
+.card-detail__content section {
+  margin-bottom: 18px;
+}
+
+/* TÍTULOS DE SECCIÓN */
+
+.card-detail__content h4 {
+  margin: 0 0 6px;
+
+  font-size: 0.9rem;
+}
+
+/* TEXTO */
+
+.card-detail__content p {
+  margin: 0;
+
+  font-size: 0.88rem;
+  line-height: 1.55;
+
+  color: #62584f;
+}
+
+/*PALABRAS CLAVE */
+
+.card-detail__keywords {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+.card-detail__keywords span {
+  padding: 5px 8px;
+
+  border-radius: 15px;
+
+  background: #eee7dd;
+  color: #51463d;
+
+  font-size: 0.75rem;
+}
+
+/* BOTÓN CERRAR */
+
+.card-detail__close {
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  width: 30px;
+  height: 30px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #eee7dd;
+  color: #302820;
+
+  font-size: 21px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  z-index: 5;
+}
+
+.card-detail__close:hover {
+  background: #ded5c9;
+}
+
+/*ANIMACIÓN */
+
+@keyframes cardExpand {
+  from {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*TABLET / PANTALLAS MEDIANAS */
+
+@media (max-width: 900px) {
+  .card-selected__layout {
+    grid-template-columns: minmax(130px, 0.7fr) minmax(0, 1.3fr);
+
+    gap: 16px;
+  }
+
+  .card-detail__content {
+    padding-right: 16px;
+  }
+}
+
+/*CELULAR/ Responsive */
+
+@media (max-width: 700px) {
+  /* En celular la carta deja de ocupar dos columnas porque el grid ya es mucho más pequeño*/
+
+  .card-selected {
+    grid-column: 1 / -1;
+  }
+
+  .card-selected__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .card-detail__content {
+    padding: 8px 4px 4px;
+  }
+}
+
+/*FILTROS DE CARTAS */
+
+.card-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-bottom: 32px;
+  padding: 8px;
+
+  background: white;
+  border-radius: 16px;
+}
+
+.card-filter {
+  border: none;
+  border-radius: 12px;
+
+  padding: 10px 16px;
+
+  background: transparent;
+  color: #62584f;
+
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card-filter:hover {
+  background: #eee7dd;
+  color: #302820;
+}
+
+.card-filter.active {
+  background: #302820;
+  color: white;
+}
+
+.card-filter:active {
+  transform: scale(0.97);
+}
+
+
+/*ENCABEZADO DE RESULTADOS */
+
+.card-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.card-section-header h2 {
+  margin: 0;
+}
+
+.card-count {
+  padding: 5px 9px;
+
+  border-radius: 12px;
+
+  background: #eee7dd;
+  color: #62584f;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+
+/*FILTROS EN CELULAR */
+
+@media (max-width: 700px) {
+  .card-filters {
+    gap: 6px;
+  }
+
+  .card-filter {
+    padding: 9px 12px;
+    font-size: 0.8rem;
+  }
+
+  .card-section-header {
+    align-items: baseline;
+  }
+}
+
+/*SÍ / NO / NEUTRAL */
+
+.card-detail__answer {
+  margin-top: 20px;
+}
+
+.card-detail__answer-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 72px;
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.answer-yes {
+  background: #e5eee4;
+  color: #456044;
+}
+
+.answer-no {
+  background: #eee1df;
+  color: #754c48;
+}
+
+.answer-neutral {
+  background: #eee7dd;
+  color: #6b6259;
+}
+
+.card-detail__method {
+  margin-top: 7px !important;
+
+  font-size: 0.72rem !important;
+  font-style: italic;
+
+  color: #8b7968 !important;
+}
+
+.card-detail__answer-note {
+  margin-top: 7px !important;
+
+  font-size: 0.78rem !important;
+}
+
+
+/* FUENTE */
+
+.card-detail__source {
+  padding-top: 4px;
+}
+
+.card-detail__source-title {
+  font-weight: 600;
+  color: #51463d !important;
+}
+
+.card-detail__source-author {
+  margin-top: 3px !important;
+
+  font-size: 0.76rem !important;
+  color: #8b7968 !important;
+}
+
+/*PESTAÑAS PRINCIPALES */
+
+.main-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 28px 0 24px;
+  padding: 6px;
+  width: fit-content;
+  background: #eee8df;
+  border-radius: 14px;
+}
+
+.main-tab {
+  border: none;
+  background: transparent;
+  color: #4a4038;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.main-tab:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.main-tab.active {
+  background: #2f2925;
+  color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.main-tab:active {
+  transform: scale(0.97);
+}
+
+/*COMBINACIONES */
+
+.combinations-section {
+  margin-top: 32px;
+}
+
+
+/* ENCABEZADO */
+
+.combinations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.combinations-header h2 {
+  margin: 8px 0 8px;
+}
+
+.combinations-description {
+  margin: 0;
+  color: #5f554d;
+}
+
+
+/* CONTADOR */
+
+.combinations-count {
+  flex-shrink: 0;
+  padding: 8px 13px;
+  background: #eee8df;
+  border-radius: 10px;
+  color: #3b332d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.combinations-count span {
+  font-weight: 400;
+}
+
+
+/* LISTA */
+
+.combination-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(320px, 1fr)
+  );
+  gap: 20px;
+}
+
+
+/* TARJETA */
+
+.combination-card {
+  background: #f3ead8;;
+  border: 1px solid #e7dfd6;
+  border-radius: 16px;
+  padding: 18px;
+
+  box-shadow: 0 4px 14px rgba(47, 41, 37, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.combination-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(47, 41, 37, 0.08);
+}
+
+
+/* CABECERA DE TARJETA */
+
+.combination-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.combination-count {
+  color: #756a61;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.combination-source-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #f1ece6;
+  color: #6b6057;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+/* CARTAS */
+
+.combination-cards {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px;
+
+  margin: 4px 0 20px;
+}
+
+.combination-card-item {
+  position: relative;
+  width: 82px;
+
+  text-align: center;
+}
+
+
+/* IMAGEN REAL DE LA CARTA */
+
+.combination-card-item > img {
+  display: block;
+
+  width: 82px !important;
+  height: 138px !important;
+
+  object-fit: contain !important;
+
+  border-radius: 7px;
+
+  box-shadow:
+    0 4px 10px rgba(47, 41, 37, 0.14);
+}
+
+
+/* NOMBRE */
+
+.combination-card-item h3 {
+  margin: 8px 0 0;
+
+  color: #3b332d;
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+
+/* SIGNO + */
+
+.combination-plus {
+  position: absolute;
+
+  top: 55px;
+  right: -22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+
+  background: #2f2925;
+  color: #f3ead8;;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
+/* INTERPRETACIÓN */
+
+.combination-interpretation {
+  padding-top: 16px;
+  border-top: 1px solid #eee7df;
+}
+
+.combination-interpretation h4 {
+  margin: 0 0 7px;
+
+  color: #3b332d;
+  font-size: 13px;
+}
+
+.combination-interpretation p {
+  margin: 0;
+
+  color: #514840;
+
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+
+/* NOTA */
+
+.combination-note {
+  margin-top: 14px;
+  padding: 10px 12px;
+
+  background: #f5f0ea;
+  border-radius: 10px;
+}
+
+.combination-note span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #756a61;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.combination-note p {
+  margin: 0;
+
+  color: #5a5048;
+
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+
+/* FUENTE */
+
+.combination-source {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-top: 14px;
+  padding-top: 13px;
+
+  border-top: 1px solid #eee7df;
+}
+
+.combination-source > span {
+  flex-shrink: 0;
+
+  color: #756a61;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.combination-source__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.combination-source__info strong {
+  color: #3b332d;
+  font-size: 12px;
+}
+
+.combination-source__info span {
+  color: #756a61;
+  font-size: 11px;
+}
+
+
+/* ESTADO VACÍO */
+
+.empty-state {
+  padding: 35px;
+
+  background: #ffffffa2;
+
+  border: 1px solid #e7dfd6;
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow: 0 4px 14px rgba(47, 41, 37, 0.04);
+}
+
+.empty-state h3 {
+  margin-top: 0;
+}
+
+.empty-state p {
+  margin-bottom: 0;
+  color: #655b53;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .combinations-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .combination-list {
+    grid-template-columns: 1fr;
+  }
+
+  .combination-card {
+    padding: 16px;
+  }
+
+  .combination-card-item {
+    width: 72px;
+  }
+
+  .combination-card-item > img {
+    width: 72px !important;
+    height: 122px !important;
+  }
+
+  .combination-plus {
+    top: 49px;
+    right: -20px;
+  }
+}
+
+/* =========================================
+   FILTROS DE COMBINACIONES
+   ========================================= */
+
+.combination-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.combination-filter {
+  border: 1px solid #ded5cc;
+  background: #f3ead8;;
+  color: #5a5048;
+
+  padding: 8px 14px;
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.combination-filter:hover {
+  background: #f3eee8;
+}
+
+.combination-filter.active {
+  background: #2f2925;
+  border-color: #2f2925;
+  color: #ffffffc4;
+}
+
+
+/* ORIENTACIÓN */
+
+.card-orientation {
+  display: inline-block;
+
+  margin-top: 6px;
+  padding: 3px 7px;
+
+  border-radius: 999px;
+
+  background: #eee8df;
+  color: #665b53;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card-orientation.reversed {
+  background: #e8e1da;
+}
+
+/*AJUSTE SEGÚN CANTIDAD DE CARTAS */
+
+/* 2 cartas */
+.combination-cards--2 {
+  gap: 28px;
+}
+
+.combination-cards--2 .combination-card-item {
+  width: 82px;
+}
+
+.combination-cards--2 .combination-card-item > img {
+  width: 82px !important;
+  height: 138px !important;
+}
+
+
+/* 3 cartas */
+.combination-cards--3 {
+  gap: 18px;
+}
+
+.combination-cards--3 .combination-card-item {
+  width: 72px;
+}
+
+.combination-cards--3 .combination-card-item > img {
+  width: 72px !important;
+  height: 121px !important;
+}
+
+
+/* 4 cartas */
+.combination-cards--4 {
+  gap: 12px;
+}
+
+.combination-cards--4 .combination-card-item {
+  width: 62px;
+}
+
+.combination-cards--4 .combination-card-item > img {
+  width: 62px !important;
+  height: 105px !important;
+}
+
+
+/* 5 cartas */
+.combination-cards--5 {
+  gap: 8px;
+}
+
+.combination-cards--5 .combination-card-item {
+  width: 52px;
+}
+
+.combination-cards--5 .combination-card-item > img {
+  width: 52px !important;
+  height: 88px !important;
+}
+
+
+/*SIGNO + */
+
+.combination-cards--2 .combination-plus {
+  top: 57px;
+  right: -26px;
+}
+
+.combination-cards--3 .combination-plus {
+  top: 48px;
+  right: -20px;
+}
+
+.combination-cards--4 .combination-plus {
+  top: 40px;
+  right: -18px;
+}
+
+.combination-cards--5 .combination-plus {
+  top: 32px;
+  right: -15px;
+}
+
+
+/* NOMBRES EN COMBINACIONES GRANDES */
+
+.combination-cards--4 .combination-card-item h3 {
+  font-size: 10px;
+}
+
+.combination-cards--5 .combination-card-item h3 {
+  font-size: 9px;
+}
+
+/*TIRADAS */
+
+.spreads-section {
+  padding-bottom: 40px;
+}
+
+.spread-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(340px, 1fr)
+  );
+  gap: 20px;
+}
+
+.spread-card {
+  background: #f3ead8 !important;
+  border: 1px solid #e5ddd5;
+  border-radius: 16px;
+  padding: 22px;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.spread-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(50, 40, 30, 0.08);
+}
+
+.spread-card.selected {
+  border-color: #2f2925;
+  box-shadow: 0 8px 24px rgba(50, 40, 30, 0.1);
+}
+
+.spread-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.spread-card-header h3 {
+  margin: 0 0 5px;
+  color: #2f2925;
+}
+
+.spread-card-header span {
+  font-size: 12px;
+  color: #85786e;
+}
+
+.spread-status {
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: #f1ece7;
+  color: #5e534b !important;
+  font-size: 10px !important;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/*ÁREA DE LA TIRADA */
+
+.spread-layout {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  margin: 10px auto 20px;
+}
+
+/* Espacio de cada carta */
+
+.spread-slot {
+  position: absolute;
+
+  width: 58px;
+  height: 94px;
+
+  border: 1.5px dashed #b9ada2;
+  border-radius: 9px;
+
+  background: #faf7f4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #8b7d72;
+  font-size: 13px;
+  font-weight: 600;
+
+  transform: translate(-50%, -50%);
+}
+
+/*UNA CARTA */
+
+.spread-layout--single {
+  height: 170px;
+}
+
+.spread-layout--single .spread-slot-1 {
+  left: 50%;
+  top: 50%;
+}
+
+/*TRES CARTAS */
+
+.spread-layout--three-linear {
+  height: 160px;
+}
+
+.spread-layout--three-linear .spread-slot-1 {
+  left: 20%;
+  top: 50%;
+}
+
+.spread-layout--three-linear .spread-slot-2 {
+  left: 50%;
+  top: 50%;
+}
+
+.spread-layout--three-linear .spread-slot-3 {
+  left: 80%;
+  top: 50%;
+}
+
+/*ESTRELLA */
+
+.spread-layout--star {
+  height: 260px;
+}
+
+.spread-layout--star .spread-slot-1 {
+  left: 50%;
+  top: 50%;
+}
+
+.spread-layout--star .spread-slot-2 {
+  left: 50%;
+  top: 12%;
+}
+
+.spread-layout--star .spread-slot-3 {
+  left: 22%;
+  top: 38%;
+}
+
+.spread-layout--star .spread-slot-4 {
+  left: 78%;
+  top: 38%;
+}
+
+.spread-layout--star .spread-slot-5 {
+  left: 30%;
+  top: 78%;
+}
+
+.spread-layout--star .spread-slot-6 {
+  left: 70%;
+  top: 78%;
+}
+
+.spread-layout--star .spread-slot-7 {
+  left: 50%;
+  top: 90%;
+}
+
+/* HERRADURA */
+
+.spread-layout--horseshoe {
+  height: 250px;
+}
+
+.spread-layout--horseshoe .spread-slot-1 {
+  left: 8%;
+  top: 65%;
+}
+
+.spread-layout--horseshoe .spread-slot-2 {
+  left: 22%;
+  top: 40%;
+}
+
+.spread-layout--horseshoe .spread-slot-3 {
+  left: 37%;
+  top: 25%;
+}
+
+.spread-layout--horseshoe .spread-slot-4 {
+  left: 50%;
+  top: 20%;
+}
+
+.spread-layout--horseshoe .spread-slot-5 {
+  left: 63%;
+  top: 25%;
+}
+
+.spread-layout--horseshoe .spread-slot-6 {
+  left: 78%;
+  top: 40%;
+}
+
+.spread-layout--horseshoe .spread-slot-7 {
+  left: 92%;
+  top: 65%;
+}
+
+/*CRUZ CELTA */
+
+.spread-layout--celtic-cross {
+  position: relative;
+  width: 340px;
+  max-width: 100%;
+  height: 340px;
+  margin: 10px auto 25px;
+}
+
+/* Tamaño de las cartas */
+.spread-layout--celtic-cross .spread-slot {
+  width: 52px;
+  height: 84px;
+  transform: translate(-50%, -50%);
+}
+
+/*
+   CRUZ
+*/
+
+/* 1 — centro */
+.spread-layout--celtic-cross .spread-slot-1 {
+  left: 31%;
+  top: 50%;
+  z-index: 2;
+}
+
+/* 2 — carta que cruza la 1 */
+.spread-layout--celtic-cross .spread-slot-2 {
+  left: 31%;
+  top: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotate(90deg);
+  z-index: 3;
+}
+
+/* 3 — abajo */
+.spread-layout--celtic-cross .spread-slot-3 {
+  left: 31%;
+  top: 83%;
+  z-index: 1;
+}
+
+/* 4 — izquierda */
+.spread-layout--celtic-cross .spread-slot-4 {
+  left: 12%;
+  top: 50%;
+  z-index: 1;
+}
+
+/* 5 — arriba */
+.spread-layout--celtic-cross .spread-slot-5 {
+  left: 31%;
+  top: 17%;
+  z-index: 1;
+}
+
+/* 6 — derecha */
+.spread-layout--celtic-cross .spread-slot-6 {
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+}
+
+/*
+   COLUMNA DERECHA
+*/
+
+/* 7 */
+.spread-layout--celtic-cross .spread-slot-7 {
+  left: 82%;
+  top: 83%;
+}
+
+/* 8 */
+.spread-layout--celtic-cross .spread-slot-8 {
+  left: 82%;
+  top: 61%;
+}
+
+/* 9 */
+.spread-layout--celtic-cross .spread-slot-9 {
+  left: 82%;
+  top: 39%;
+}
+
+/* 10 */
+.spread-layout--celtic-cross .spread-slot-10 {
+  left: 82%;
+  top: 17%;
+}
+
+/* AÑO ASTROLÓGICO */
+
+.spread-layout--astrological-year {
+  position: relative;
+
+  width: 320px;
+  max-width: 100%;
+  height: 320px;
+
+  margin: 5px auto 25px;
+}
+
+.spread-layout--astrological-year .spread-slot {
+  width: 44px;
+  height: 72px;
+
+  transform: translate(-50%, -50%);
+}
+
+/* 1 */
+.spread-layout--astrological-year .spread-slot-1 {
+  left: 50%;
+  top: 7%;
+}
+
+/* 2 */
+.spread-layout--astrological-year .spread-slot-2 {
+  left: 72%;
+  top: 12%;
+}
+
+/* 3 */
+.spread-layout--astrological-year .spread-slot-3 {
+  left: 89%;
+  top: 29%;
+}
+
+/* 4 */
+.spread-layout--astrological-year .spread-slot-4 {
+  left: 95%;
+  top: 50%;
+}
+
+/* 5 */
+.spread-layout--astrological-year .spread-slot-5 {
+  left: 89%;
+  top: 71%;
+}
+
+/* 6 */
+.spread-layout--astrological-year .spread-slot-6 {
+  left: 72%;
+  top: 88%;
+}
+
+/* 7 */
+.spread-layout--astrological-year .spread-slot-7 {
+  left: 50%;
+  top: 93%;
+}
+
+/* 8 */
+.spread-layout--astrological-year .spread-slot-8 {
+  left: 28%;
+  top: 88%;
+}
+
+/* 9 */
+.spread-layout--astrological-year .spread-slot-9 {
+  left: 11%;
+  top: 71%;
+}
+
+/* 10 */
+.spread-layout--astrological-year .spread-slot-10 {
+  left: 5%;
+  top: 50%;
+}
+
+/* 11 */
+.spread-layout--astrological-year .spread-slot-11 {
+  left: 11%;
+  top: 29%;
+}
+
+/* 12 */
+.spread-layout--astrological-year .spread-slot-12 {
+  left: 28%;
+  top: 12%;
+}
+
+/* CHAKRA */
+
+.spread-layout--chakra {
+  width: 100%;
+  height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  margin: 10px auto 20px;
+}
+
+.spread-layout--chakra .spread-slot {
+  position: relative;
+
+  width: 48px;
+  height: 38px;
+
+  left: auto !important;
+  top: auto !important;
+
+  transform: none;
+
+  flex-shrink: 0;
+}
+
+/* DESCRIPCIÓN / FUENTE */
+
+.spread-description {
+  margin: 0 0 14px;
+  color: #625850;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.spread-source {
+  padding-top: 12px;
+  border-top: 1px solid #eee7e1;
+  color: #8a7d73;
+  font-size: 11px;
+}
+
+.spread-source span {
+  display: block;
+}
+
+/* DETALLE */
+
+.spread-detail {
+  margin-top: 24px;
+  padding: 22px;
+
+  background: #ffffffac;
+  border: 1px solid #e5ddd5;
+  border-radius: 16px;
+}
+
+.spread-detail h3 {
+  margin: 0;
+  color: #2f2925;
+}
+
+.spread-detail p {
+  color: #625850;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/*TIRADAS */
+
+.spreads-section {
+  padding-bottom: 40px;
+}
+
+.spread-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(340px, 1fr)
+  );
+  gap: 20px;
+}
+
+/*TARJETA */
+
+.spread-card {
+  background: #ffffff9a;
+  border: 1px solid #e5ddd5;
+  border-radius: 16px;
+  padding: 22px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.spread-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 24px rgba(50, 40, 30, 0.08);
+}
+
+.spread-card.selected {
+  border-color: #2f2925;
+
+  box-shadow:
+    0 8px 24px rgba(50, 40, 30, 0.1);
+}
+
+.spread-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.spread-card-header h3 {
+  margin: 0 0 5px;
+
+  color: #2f2925;
+}
+
+.spread-card-header span {
+  font-size: 12px;
+  color: #85786e;
+}
+
+/*ESTADO */
+
+.spread-status {
+  padding: 5px 9px;
+
+  border-radius: 8px;
+
+  background: #f1ece7;
+
+  color: #5e534b !important;
+
+  font-size: 10px !important;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+/* ESTRUCTURA */
+
+.spread-layout {
+  position: relative;
+
+  width: 100%;
+  height: 230px;
+
+  margin: 10px auto 20px;
+}
+
+.spread-slot {
+  position: absolute;
+
+  width: 54px;
+  height: 86px;
+
+  border: 1.5px dashed #b9ada2;
+  border-radius: 9px;
+
+  background: #faf7f4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #8b7d72;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transform: translate(-50%, -50%);
+}
+
+/* UNA CARTA */
+
+.spread-layout--single {
+  height: 150px;
+}
+
+.spread-layout--single .spread-slot-1 {
+  left: 50%;
+  top: 50%;
+}
+
+/* TRES CARTAS */
+
+.spread-layout--three-linear {
+  height: 140px;
+}
+
+.spread-layout--three-linear .spread-slot-1 {
+  left: 20%;
+  top: 50%;
+}
+
+.spread-layout--three-linear .spread-slot-2 {
+  left: 50%;
+  top: 50%;
+}
+
+.spread-layout--three-linear .spread-slot-3 {
+  left: 80%;
+  top: 50%;
+}
+
+/* ESTRELLA */
+
+.spread-layout--star {
+  height: 250px;
+}
+
+.spread-layout--star .spread-slot-1 {
+  left: 50%;
+  top: 50%;
+}
+
+.spread-layout--star .spread-slot-2 {
+  left: 50%;
+  top: 12%;
+}
+
+.spread-layout--star .spread-slot-3 {
+  left: 22%;
+  top: 38%;
+}
+
+.spread-layout--star .spread-slot-4 {
+  left: 78%;
+  top: 38%;
+}
+
+.spread-layout--star .spread-slot-5 {
+  left: 30%;
+  top: 78%;
+}
+
+.spread-layout--star .spread-slot-6 {
+  left: 70%;
+  top: 78%;
+}
+
+.spread-layout--star .spread-slot-7 {
+  left: 50%;
+  top: 92%;
+}
+
+/* HERRADURA */
+
+.spread-layout--horseshoe {
+  height: 240px;
+}
+
+.spread-layout--horseshoe .spread-slot-1 {
+  left: 8%;
+  top: 65%;
+}
+
+.spread-layout--horseshoe .spread-slot-2 {
+  left: 22%;
+  top: 40%;
+}
+
+.spread-layout--horseshoe .spread-slot-3 {
+  left: 37%;
+  top: 25%;
+}
+
+.spread-layout--horseshoe .spread-slot-4 {
+  left: 50%;
+  top: 20%;
+}
+
+.spread-layout--horseshoe .spread-slot-5 {
+  left: 63%;
+  top: 25%;
+}
+
+.spread-layout--horseshoe .spread-slot-6 {
+  left: 78%;
+  top: 40%;
+}
+
+.spread-layout--horseshoe .spread-slot-7 {
+  left: 92%;
+  top: 65%;
+}
+
+/* CRUZ CELTA */
+
+.spread-layout--celtic-cross {
+  width: 340px;
+  max-width: 100%;
+  height: 310px;
+
+  margin: 10px auto 20px;
+}
+
+/* centro */
+
+.spread-layout--celtic-cross .spread-slot-1 {
+  left: 32%;
+  top: 50%;
+
+  z-index: 2;
+}
+
+/* carta cruzada */
+
+.spread-layout--celtic-cross .spread-slot-2 {
+  left: 32%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(90deg);
+
+  z-index: 3;
+}
+
+/* abajo */
+
+.spread-layout--celtic-cross .spread-slot-3 {
+  left: 32%;
+  top: 83%;
+}
+
+/* izquierda */
+
+.spread-layout--celtic-cross .spread-slot-4 {
+  left: 12%;
+  top: 50%;
+}
+
+/* arriba */
+
+.spread-layout--celtic-cross .spread-slot-5 {
+  left: 32%;
+  top: 17%;
+}
+
+/* derecha */
+
+.spread-layout--celtic-cross .spread-slot-6 {
+  left: 52%;
+  top: 50%;
+}
+
+/* columna */
+
+.spread-layout--celtic-cross .spread-slot-7 {
+  left: 82%;
+  top: 83%;
+}
+
+.spread-layout--celtic-cross .spread-slot-8 {
+  left: 82%;
+  top: 61%;
+}
+
+.spread-layout--celtic-cross .spread-slot-9 {
+  left: 82%;
+  top: 39%;
+}
+
+.spread-layout--celtic-cross .spread-slot-10 {
+  left: 82%;
+  top: 17%;
+}
+
+/* AÑO ASTROLÓGICO */
+
+.spread-layout--astrological-year {
+  position: relative;
+
+  width: 320px;
+  max-width: 100%;
+  height: 300px;
+
+  margin: 5px auto 20px;
+}
+
+.spread-layout--astrological-year .spread-slot {
+  width: 42px;
+  height: 68px;
+}
+
+/* 1 */
+
+.spread-layout--astrological-year .spread-slot-1 {
+  left: 50%;
+  top: 7%;
+}
+
+/* 2 */
+
+.spread-layout--astrological-year .spread-slot-2 {
+  left: 72%;
+  top: 12%;
+}
+
+/* 3 */
+
+.spread-layout--astrological-year .spread-slot-3 {
+  left: 89%;
+  top: 29%;
+}
+
+/* 4 */
+
+.spread-layout--astrological-year .spread-slot-4 {
+  left: 95%;
+  top: 50%;
+}
+
+/* 5 */
+
+.spread-layout--astrological-year .spread-slot-5 {
+  left: 89%;
+  top: 71%;
+}
+
+/* 6 */
+
+.spread-layout--astrological-year .spread-slot-6 {
+  left: 72%;
+  top: 88%;
+}
+
+/* 7 */
+
+.spread-layout--astrological-year .spread-slot-7 {
+  left: 50%;
+  top: 93%;
+}
+
+/* 8 */
+
+.spread-layout--astrological-year .spread-slot-8 {
+  left: 28%;
+  top: 88%;
+}
+
+/* 9 */
+
+.spread-layout--astrological-year .spread-slot-9 {
+  left: 11%;
+  top: 71%;
+}
+
+/* 10 */
+
+.spread-layout--astrological-year .spread-slot-10 {
+  left: 5%;
+  top: 50%;
+}
+
+/* 11 */
+
+.spread-layout--astrological-year .spread-slot-11 {
+  left: 11%;
+  top: 29%;
+}
+
+/* 12 */
+
+.spread-layout--astrological-year .spread-slot-12 {
+  left: 28%;
+  top: 12%;
+}
+
+/* =====================================================
+   CHAKRA
+   ===================================================== */
+
+.spread-layout--chakra {
+  width: 100%;
+  height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  margin: 10px auto 20px;
+}
+
+.spread-layout--chakra .spread-slot {
+  position: relative;
+
+  width: 48px;
+  height: 36px;
+
+  left: auto !important;
+  top: auto !important;
+
+  transform: none;
+
+  flex-shrink: 0;
+}
+
+/*DESCRIPCIÓN */
+
+.spread-description {
+  margin: 0 0 14px;
+
+  color: #625850;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* FUENTE */
+
+.spread-source {
+  padding-top: 12px;
+
+  border-top: 1px solid #eee7e1;
+
+  color: #8a7d73;
+
+  font-size: 11px;
+}
+
+.spread-source span {
+  display: block;
+}
+
+/*INDICADOR CLICK */
+
+.spread-click-hint {
+  margin-top: 12px;
+
+  color: #6e6259;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-align: right;
+}
+
+/*DETALL */
+
+.spread-detail {
+  margin-top: 24px;
+  padding: 26px;
+
+  background: #fff;
+
+  border: 1px solid #e5ddd5;
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 24px rgba(50, 40, 30, 0.06);
+}
+
+.spread-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #eee7e1;
+}
+
+.spread-detail-header h2 {
+  margin: 0 0 8px;
+
+  color: #2f2925;
+}
+
+.spread-detail-description {
+  max-width: 800px;
+
+  margin: 0;
+
+  color: #625850;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/*BOTÓN CERRAR */
+
+.spread-close-button {
+  border: 1px solid #ded5cc;
+
+  background: #ffffffa8;
+
+  color: #5a5048;
+
+  padding: 8px 14px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.spread-close-button:hover {
+  background: #f5f0ec;
+}
+
+/* POSICIONES */
+
+.spread-positions {
+  margin-top: 24px;
+}
+
+.spread-positions h3,
+.spread-detail-source h3 {
+  margin: 0 0 14px;
+
+  color: #2f2925;
+}
+
+.spread-position-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 12px;
+}
+
+.spread-position {
+  display: flex;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  background: #faf7f4;
+
+  border: 1px solid #eee7e1;
+
+  border-radius: 12px;
+}
+
+.spread-position-number {
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2f2925;
+
+  color: #ffffff86;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.spread-position-content h4 {
+  margin: 2px 0 6px;
+
+  color: #3a322d;
+
+  font-size: 14px;
+}
+
+.spread-position-content p {
+  margin: 0;
+
+  color: #6c6057;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* FUENTE DEL DETALLE */
+
+.spread-detail-source {
+  margin-top: 26px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #eee7e1;
+}
+
+.source-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  color: #6c6057;
+
+  font-size: 12px;
+}
+
+.source-item strong {
+  color: #3a322d;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .spread-list {
+    grid-template-columns: 1fr;
+  }
+
+  .spread-detail-header {
+    flex-direction: column;
+  }
+
+  .spread-close-button {
+    align-self: flex-start;
+  }
+
+  .spread-position-list {
+    grid-template-columns: 1fr;
+  }
+
+  .spread-layout--celtic-cross {
+    width: 300px;
+  }
+
+  .spread-layout--astrological-year {
+    width: 290px;
+  }
+}
+
+
+/*MODAL DE TIRADAS */
+
+.spread-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(35, 29, 25, 0.55);
+
+  backdrop-filter: blur(4px);
+
+  animation: spreadOverlayIn 0.2s ease;
+}
+
+.spread-modal {
+  position: relative;
+
+  width: min(900px, 100%);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 30px;
+
+  background: #f3ead8;
+
+  border: 1px solid #e5ddd5;
+  border-radius: 20px;
+
+  box-shadow:
+    0 20px 60px rgba(35, 29, 25, 0.2);
+
+  animation: spreadModalIn 0.25s ease;
+}
+
+.spread-modal-close {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  width: 34px;
+  height: 34px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f1ece7;
+
+  color: #5a5048;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.spread-modal-close:hover {
+  background: #e6ded7;
+  transform: rotate(90deg);
+}
+
+/* HEADER */
+
+.spread-modal-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding-right: 45px;
+}
+
+.spread-modal-header h2 {
+  margin: 0 0 6px;
+
+  color: #2f2925;
+
+  font-size: 28px;
+}
+
+.spread-modal-count {
+  color: #85786e;
+
+  font-size: 13px;
+}
+
+.spread-modal-description {
+  max-width: 750px;
+
+  margin: 18px 0 0;
+
+  color: #625850;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ESTRUCTURA DENTRO DEL MODAL */
+
+.spread-modal-layout {
+  display: flex;
+  justify-content: center;
+
+  margin: 28px 0;
+
+  padding: 20px;
+
+  background: #faf7f4;
+
+  border: 1px solid #eee7e1;
+  border-radius: 16px;
+}
+
+
+.spread-modal-layout .spread-layout {
+  margin: 0;
+}
+
+/* POSICIONES */
+
+.spread-modal-positions {
+  margin-top: 28px;
+}
+
+.spread-modal-positions h3,
+.spread-detail-source h3 {
+  margin: 0 0 16px;
+
+  color: #2f2925;
+
+  font-size: 18px;
+}
+
+.spread-position-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 12px;
+}
+
+.spread-position {
+  display: flex;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  background: #faf7f4;
+
+  border: 1px solid #eee7e1;
+
+  border-radius: 12px;
+}
+
+.spread-position-number {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2f2925;
+
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.spread-position-content h4 {
+  margin: 2px 0 6px;
+
+  color: #3a322d;
+
+  font-size: 14px;
+}
+
+.spread-position-content p {
+  margin: 0;
+
+  color: #6c6057;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* FUENTE*/
+
+.spread-detail-source {
+  margin-top: 28px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #eee7e1;
+}
+
+.source-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  color: #6c6057;
+
+  font-size: 12px;
+}
+
+.source-item strong {
+  color: #3a322d;
+}
+
+/* ANIMACIONES */
+
+@keyframes spreadOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spreadModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .spread-modal-overlay {
+    padding: 12px;
+  }
+
+  .spread-modal {
+    max-height: 94vh;
+
+    padding: 22px;
+
+    border-radius: 16px;
+  }
+
+  .spread-modal-header {
+    flex-direction: column;
+  }
+
+  .spread-modal-header h2 {
+    font-size: 23px;
+  }
+
+  .spread-position-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* GUÍAS DE INTERPRETACIÓN */
+
+.reading-guides {
+  margin-top: 32px;
+}
+
+.reading-guides__header {
+  margin-bottom: 32px;
+}
+
+.reading-guides__header h2 {
+  margin: 8px 0;
+}
+
+.reading-guides__header p {
+  margin: 0;
+  max-width: 760px;
+  color: #5f554d;
+  line-height: 1.6;
+}
+
+/* GRID DE GUÍAS */
+
+.reading-guides__grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(360px, 1fr)
+  );
+  gap: 20px;
+}
+
+/* TARJETA */
+
+.reading-guide-card {
+  background: #f3ead8;;
+  border: 1px solid #e5ddd5;
+  border-radius: 16px;
+  padding: 24px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.reading-guide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(50, 40, 30, 0.08);
+}
+
+.reading-guide-card__header {
+  margin-bottom: 12px;
+}
+
+.reading-guide-card__header h3 {
+  margin: 0;
+  color: #2f2925;
+  font-size: 1.35rem;
+}
+
+.reading-guide-card__description {
+  margin: 0 0 24px;
+  color: #5f554d;
+  line-height: 1.6;
+}
+
+/* SECCIONES */
+
+.reading-guide-card__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.reading-guide-section {
+  padding-top: 18px;
+  border-top: 1px solid #eee8df;
+}
+
+.reading-guide-section h4 {
+  margin: 0 0 7px;
+  color: #3b332d;
+  font-size: 0.95rem;
+}
+
+.reading-guide-section p {
+  margin: 0;
+  color: #62584f;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .reading-guides__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reading-guide-card {
+    padding: 20px;
+  }
+}
+
+.reading-guide-section ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #62584f;
+}
+
+.reading-guide-section li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+/*TEMA RETRO  */
+
+:root {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #30251f;
+  background: #211b20;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 0%, #3b3036 0, #211b20 55%, #171318 100%);
+  color: #d8c9ad;
+}
+
+.app {
+  max-width: 1280px;
+  padding: 34px 28px 80px;
+}
+
+.hero {
+  position: relative;
+  margin-bottom: 28px;
+  padding: 34px 38px;
+  border: 1px solid #b89b63;
+  border-radius: 4px;
+  background:
+    linear-gradient(rgba(255, 250, 236, 0.96), rgba(246, 237, 215, 0.96));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.hero::before,
+.hero::after {
+  position: absolute;
+  color: #a78b57;
+  font-size: 22px;
+  line-height: 1;
+}
+
+
+
+.hero::after {
+  content: "☾";
+  right: 18px;
+  bottom: 12px;
+}
+
+.eyebrow {
+  color: #8d7143;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.18em;
+}
+
+.hero h1 {
+  margin: 8px 0 10px;
+  color: #352822;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.hero p:last-child {
+  color: #67584c;
+}
+
+.main-tabs {
+  gap: 4px;
+  margin-bottom: 28px;
+  padding: 6px;
+  border: 1px solid #6e5a47;
+  border-radius: 4px;
+  background: #30262d;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.main-tab {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  color: #d8c9ad;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.03em;
+}
+
+.main-tab:hover {
+  background: #40333a;
+  color: #f1e4c9;
+}
+
+.main-tab.active {
+  border-color: #ad925d;
+  background: #eadcbf;
+  color: #332821;
+}
+
+.card-filters {
+  margin-bottom: 24px;
+  padding: 8px;
+  border: 1px solid #c6ad7b;
+  border-radius: 4px;
+  background: #efe4ca;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card-filter {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: #655548;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.card-filter:hover {
+  background: #e2d3b2;
+  color: #352821;
+}
+
+.card-filter.active {
+  border-color: #8f7449;
+  background: #352a26;
+  color: #f4e9d0;
+}
+
+.card-section-header h2 {
+  color: #eadfc9;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.card-count {
+  border: 1px solid #806a4c;
+  background: #30262d;
+  color: #d8c9ad;
+}
+
+.tarot-card {
+  border: 1px solid #b89b63;
+  border-radius: 4px;
+  background: #f3ead6;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarot-card:not(.card-selected):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+}
+
+.tarot-card__image {
+  border-radius: 2px;
+  background: #ded0b4;
+}
+
+.tarot-card h3 {
+  color: #382b24;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+}
+
+.card-selected {
+  border-color: #c4a565;
+  background: #f7efdd;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+}
+
+.card-selected__layout {
+  grid-template-columns: minmax(200px, 0.65fr) minmax(0, 1.35fr);
+  gap: 28px;
+}
+
+.card-selected .tarot-card__image {
+  max-width: 300px;
+  margin: 0 auto;
+  border: 1px solid #a98b57;
+  box-shadow: 0 5px 14px rgba(65, 45, 30, 0.18);
+}
+
+.card-detail__content h3 {
+  color: #352821;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+}
+
+.card-detail__number {
+  color: #8d7143;
+}
+
+.card-detail__content h4 {
+  color: #3b2d25;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.card-detail__content p {
+  color: #655548;
+}
+
+.card-detail__contexts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.card-detail__contexts > div {
+  padding: 14px;
+  border: 1px solid #d0b982;
+  border-radius: 3px;
+  background: #efe3c8;
+}
+
+.card-detail__contexts strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #4b382b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.92rem;
+}
+
+.card-detail__contexts p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.card-detail__close {
+  border: 1px solid #b89b63;
+  background: #e9dcc1;
+  color: #4b382b;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.card-detail__close:hover {
+  background: #dccba5;
+}
+
+/* Mantener la grilla de contextos cómoda en pantallas pequeñas. */
+@media (max-width: 700px) {
+  .card-detail__contexts {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 26px 24px;
+  }
+}
+
+/*Arreglos*/
+
+.spreads-section > .eyebrow {
+  color: #c4a565;
+}
+
+.spreads-section > h2 {
+  color: #eadfc9 !important;
+}
+
+.spreads-section > p {
+  color: #d8c9ad !important;
+}
+
+
