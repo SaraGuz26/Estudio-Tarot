@@ -38,6 +38,6 @@ npm install
 npm run dev
 ```
 
-![INICIO](image.png)
-![TIRADAS](image-1.png)
-![SELECCION DE UNA CARTA](image-2.png)
+![INICIO](inicio.png)
+![TIRADAS](tirada.png)
+![SELECCION DE UNA CARTA](seleccion.png)
