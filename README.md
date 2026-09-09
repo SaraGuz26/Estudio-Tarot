@@ -42,6 +42,3 @@ npm run dev
 
 ## TIRADA 
 ![TIRADAS](tirada.png)
-
-## SELECCION 
-![SELECCION DE UNA CARTA](seleccion.png)
