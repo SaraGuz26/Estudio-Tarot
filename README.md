@@ -37,7 +37,11 @@ para explorar el Tarot Rider Waite Smith.
 npm install
 npm run dev
 ```
-
+## INICIO 
 ![INICIO](inicio.png)
+
+## TIRADA 
 ![TIRADAS](tirada.png)
+
+## SELECCION 
 ![SELECCION DE UNA CARTA](seleccion.png)
